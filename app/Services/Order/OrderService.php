@@ -13,9 +13,23 @@ class OrderService implements IOrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function getOrders($search = null, $perPage = 5)
+    public function getOrders($search = null, $currentPage = 1, $perPage = 5)
     {
-        return $this->orderRepository->getAllOrders($search, $perPage);
+        $totalOrders = $this->getTotalOrders($search);
+
+        $startResult = ($currentPage - 1) * $perPage + 1;
+        $endResult = min($startResult + $perPage - 1, $totalOrders);
+
+        $orders = $this->getOrders($search, $perPage, $currentPage);
+
+    return [
+        'orders' => $orders,
+        'startResult' => $startResult,
+        'endResult' => $endResult,
+        'totalOrders' => $totalOrders,
+    ];
+    
+        // return $this->orderRepository->getAllOrders($search, $perPage);
     }
 
     public function getOrderDetails($id)

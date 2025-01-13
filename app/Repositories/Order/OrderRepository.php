@@ -15,7 +15,7 @@ class OrderRepository extends BaseRepository implements IOrderRepository
    
     public function getAllOrders($search = null, $perPage = 5)
     {
-        $orders = $this->model::orderBy("id", "asc");
+        $orders = $this->model->orderBy("id", "asc");
 
         if ($search) {
             $orders->where(function ($query) use ($search) {
@@ -31,9 +31,15 @@ class OrderRepository extends BaseRepository implements IOrderRepository
         return $this->model::with('orderDetails')->find($id);
     }
 
-    public function getTotalOrders()
+    public function getTotalOrders($search = null)
     {
-        return $this->model->count();
+        $query = $this->model->query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        return $query->count();
     }
 
     public function updateOrderStatus($order, $status)

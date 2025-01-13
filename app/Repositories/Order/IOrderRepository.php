@@ -8,6 +8,6 @@ interface IOrderRepository extends IBaseRepository
 {
     public function getAllOrders($search = null, $perPage = 5);
     public function getOrderById($id);
-    public function getTotalOrders();
+    public function getTotalOrders($search = null);
     public function updateOrderStatus($order, $status);
 }

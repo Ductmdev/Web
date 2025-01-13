@@ -63,6 +63,7 @@ class ProductController extends Controller
 
         return redirect("/quantri/product")->with('alert', 'Đã xóa thành công');
     }
+    
     public function show($id)
     {
         $products = $this->productService->getProductById($id);

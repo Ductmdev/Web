@@ -4,7 +4,7 @@ namespace App\Services\Order;
 
 interface IOrderService
 {
-    public function getOrders($search = null, $perPage = 5);
+    public function getOrders($search = null, $currentPage = 1, $perPage = 5);
 
     public function getOrderDetails($id);
 

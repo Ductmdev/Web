@@ -11,12 +11,12 @@ class ProductRepository extends BaseRepository implements IProductRepository
 {
     public function getModel(): string
     {
-        return $this->model->class;
+        return Product::class;
     }
     
     public function getAllProducts($search = null, $perPage = 5)
     {
-        $query = $this->model::orderBy('id', 'asc');
+        $query = $this->model->orderBy('id', 'asc');
 
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');

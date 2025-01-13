@@ -19,20 +19,15 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $perPage = 5;
-        $currentPage = request()->query('page', 1);
+        $currentPage = $request->query('page', 1);
 
-        $totalOrders = $this->orderService->getTotalOrders();
-
-        $startResult = ($currentPage - 1) * $perPage + 1;
-        $endResult = min($startResult + $perPage - 1, $totalOrders);
-
-        $orders = $this->orderService->getOrders($request->search, $perPage);
-
+        $paginationData = $this->orderService->getOrders($request->search, $currentPage, $perPage);
+    
         return view('Admin.order.order', [
-            "orders" => $orders,
-            "startResult" => $startResult,
-            "endResult" => $endResult,
-            "totalResults" => $totalOrders,
+            "orders" => $paginationData['orders'],
+            "startResult" => $paginationData['startResult'],
+            "endResult" => $paginationData['endResult'],
+            "totalResults" => $paginationData['totalOrders'],
         ]);
     }
 
