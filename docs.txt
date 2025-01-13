@@ -1,0 +1,7 @@
+8/10/2023 : 
+Xây dựng thư viện shopping cart : laravel shopping cart
+Link : https://packagist.org/packages/bumbummen99/shoppingcart (laravel < 9) / https://packagist.org/packages/hardevine/shoppingcart (laravel 10)
+
+
+09/10/2023
+php artisan make:controller Admin\OrderController --resource
